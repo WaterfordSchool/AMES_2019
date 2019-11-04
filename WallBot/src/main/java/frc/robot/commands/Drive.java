@@ -9,16 +9,20 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
 
 public class Drive extends Command {
-  public Drive() {
+  double speed;
+  public Drive(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.dT);
+    this.speed = speed;
   }
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    DriveTrain dT = new DriveTrain();
   }
 
   // Called repeatedly when this Command is scheduled to run

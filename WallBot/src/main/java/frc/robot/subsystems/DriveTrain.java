@@ -27,12 +27,13 @@ public class DriveTrain extends Subsystem {
  SpeedControllerGroup r = new SpeedControllerGroup(r1, r2, r3); 
  SpeedControllerGroup l = new SpeedControllerGroup(l1, l2, l3);
  DifferentialDrive dT = new DifferentialDrive(l, r); 
- public void drive(){
-
+ public void drive(double left, double right){
+  dT.tankDrive(left, right);
  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new Drive(1.0));
   }
 }
