@@ -8,14 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,27 +28,24 @@ public class Robot extends IterativeRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  //Motor Controllers
-  Talon Left = new Talon(3); 
-  Talon Right = new Talon(0);
-  Talon CoconutGun = new Talon(7);
-  DifferentialDrive tDrive = new DifferentialDrive (Left, Right);
-  Joystick drivercontroller = new Joystick (0);
-  Joystick operatorcontroller = new Joystick (1);
-  double speed = 0.6;
-  
-  private double autoStartTime;
-/** CoconutGun is the ball shooter/roller
-as a tribute to Funky Kong, it is the coconut gun.
-funky kong for those of you who dont know,
-is a side character in the donkey kong country series
-and his most recent appearance was in
-Super Smash Brothers Ultimate (2018) as a spirit.
-He does not use the coconut gun, however he is a hero of mine
-and I personally think hes the coolest monkey ever.
-ooh ooh ahh ahh ahh
-*/
+  public double speed = 0.8;
 
+  //Left Motors
+  Talon l1 = new Talon(0);
+  Talon l2 = new Talon(1);
+  Talon l3 = new Talon(2);
+  //Right Motors
+  Talon r1 = new Talon(3);
+  Talon r2 = new Talon(4);
+  Talon r3 = new Talon(5);
+
+  //Speed Controller Groups
+  SpeedControllerGroup left = new SpeedControllerGroup(l1, l2, l3);
+  SpeedControllerGroup right = new SpeedControllerGroup(r1, r2, r3);
+
+  DifferentialDrive driveTrain = new DifferentialDrive(left, right);
+
+  Joystick driver = new Joystick(0);
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -72,6 +67,7 @@ ooh ooh ahh ahh ahh
    */
   @Override
   public void robotPeriodic() {
+    driveTrain.tankDrive(driver.getRawAxis(1) * speed, driver.getRawAxis(3) * speed);
   }
 
   /**
@@ -91,8 +87,6 @@ ooh ooh ahh ahh ahh
     // autoSelected = SmartDashboard.getString("Auto Selector",
     // defaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
-    autoStartTime = Timer.getFPGATimestamp();
-		
   }
 
   /**
@@ -100,18 +94,14 @@ ooh ooh ahh ahh ahh
    */
   @Override
   public void autonomousPeriodic() {
-
-   double currentTime = Timer.getFPGATimestamp();
-   double timeElapsed = currentTime - autoStartTime;
-   if (timeElapsed < 6){ //drive forward for 6 seconds
-     tDrive.tankDrive(speed, speed);
-     }
-    else if (timeElapsed < 8){
-      CoconutGun.set(0.6);
-    }
-    else {
-      tDrive.tankDrive(0.0, 0.0);
-      CoconutGun.set(0.0);
+    switch (m_autoSelected) {
+      case kCustomAuto:
+        // Put custom auto code here
+        break;
+      case kDefaultAuto:
+      default:
+        // Put default auto code here
+        break;
     }
   }
 
@@ -120,17 +110,6 @@ ooh ooh ahh ahh ahh
    */
   @Override
   public void teleopPeriodic() {
-  tDrive.tankDrive(-drivercontroller.getY(), -drivercontroller.getRawAxis(3));
-  if (operatorcontroller.getRawButton(7)) {
-		CoconutGun.set(operatorcontroller.getY());
-	}
-	else if(operatorcontroller.getRawButton(6) == false){
-		CoconutGun.set(operatorcontroller.getY());
-	}
-	else {
-    CoconutGun.set(0);
-  }
-
   }
 
   /**

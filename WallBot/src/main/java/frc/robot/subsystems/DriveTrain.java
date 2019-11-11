@@ -30,10 +30,13 @@ public class DriveTrain extends Subsystem {
  public void drive(double left, double right){
   dT.tankDrive(left, right);
  }
+ public void DriveTrain(double leftSpeed, double rightSpeed){
+  dT.tankDrive(leftSpeed, rightSpeed);
+ }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new Drive(1.0));
+    // setDefaultCommand(new Drive(1.0));
   }
 }
