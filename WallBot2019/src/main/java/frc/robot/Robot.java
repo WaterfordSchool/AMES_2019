@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void robotPeriodic() {
-    driveTrain.tankDrive(driver.getRawAxis(1) * speed, driver.getRawAxis(3) * speed);
+    driveTrain.tankDrive(-driver.getRawAxis(1) * speed, -driver.getRawAxis(3) * speed);
   }
 
   /**
