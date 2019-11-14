@@ -72,6 +72,7 @@ ooh ooh ahh ahh ahh
    */
   @Override
   public void robotPeriodic() {
+    tDrive.tankDrive(drivercontroller.getRawAxis(1) * speed, drivercontroller.getRawAxis(3) * speed);
   }
 
   /**
