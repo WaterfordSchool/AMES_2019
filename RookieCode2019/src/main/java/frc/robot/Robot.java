@@ -72,7 +72,6 @@ ooh ooh ahh ahh ahh
    */
   @Override
   public void robotPeriodic() {
-    tDrive.tankDrive(drivercontroller.getRawAxis(1) * speed, drivercontroller.getRawAxis(3) * speed);
   }
 
   /**
@@ -105,9 +104,9 @@ ooh ooh ahh ahh ahh
    double currentTime = Timer.getFPGATimestamp();
    double timeElapsed = currentTime - autoStartTime;
    if (timeElapsed < 6){ //drive forward for 6 seconds
-     tDrive.tankDrive(speed, speed);
+     tDrive.tankDrive(-speed, -speed);
      }
-    else if (timeElapsed < 8){
+    else if (timeElapsed < 12){
       CoconutGun.set(0.6);
     }
     else {
@@ -121,7 +120,7 @@ ooh ooh ahh ahh ahh
    */
   @Override
   public void teleopPeriodic() {
-  tDrive.tankDrive(-drivercontroller.getY(), -drivercontroller.getRawAxis(3));
+  tDrive.tankDrive(drivercontroller.getRawAxis(1), drivercontroller.getRawAxis(3));
   if (operatorcontroller.getRawButton(7)) {
 		CoconutGun.set(operatorcontroller.getY());
 	}
