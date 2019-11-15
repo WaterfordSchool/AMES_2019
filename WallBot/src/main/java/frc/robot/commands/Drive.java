@@ -28,7 +28,7 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    dT.drive();
+    Robot.dT.drive(Robot.m_oi.getDriver(), speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
