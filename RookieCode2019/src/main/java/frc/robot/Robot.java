@@ -103,11 +103,11 @@ ooh ooh ahh ahh ahh
 
    double currentTime = Timer.getFPGATimestamp();
    double timeElapsed = currentTime - autoStartTime;
-   if (timeElapsed < 6){ //drive forward for 6 seconds
+   if (timeElapsed < 4.5){ //drive forward for 6 seconds
      tDrive.tankDrive(-speed, -speed);
      }
     else if (timeElapsed < 12){
-      CoconutGun.set(0.6);
+      CoconutGun.set(-0.6);
     }
     else {
       tDrive.tankDrive(0.0, 0.0);
@@ -121,16 +121,8 @@ ooh ooh ahh ahh ahh
   @Override
   public void teleopPeriodic() {
   tDrive.tankDrive(drivercontroller.getRawAxis(1), drivercontroller.getRawAxis(3));
-  if (operatorcontroller.getRawButton(7)) {
-		CoconutGun.set(operatorcontroller.getY());
-	}
-	else if(operatorcontroller.getRawButton(6) == false){
-		CoconutGun.set(operatorcontroller.getY());
-	}
-	else {
-    CoconutGun.set(0);
-  }
-
+  CoconutGun.set(operatorcontroller.getY());
+  
   }
 
   /**
