@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -33,10 +36,16 @@ public class Robot extends IterativeRobot {
    */
   Talon Left = new Talon(0);
   Talon Right = new Talon(3);
-  DifferentialDrive dT = new DifferentialDrive(Left, Right);
+  Talon LEDS = new Talon(9);
+  Talon Shooter = new Talon(4);
+  Talon Feeder = new Talon(5);
+  DifferentialDrive dT = new DifferentialDrive(Right, Left);
   Joystick driver = new Joystick(0);
+  JoystickButton button7 = new JoystickButton(driver, 7);
+  JoystickButton button8 = new JoystickButton(driver, 8);
   double speed = 0.7;
-
+  double shooterStatus = 0;
+  double feederStatus = 0;
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
@@ -96,7 +105,16 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
-    dT.tankDrive(driver.getRawAxis(1) * speed, driver.getRawAxis(3) * speed);
+    dT.tankDrive(driver.getRawAxis(1) * -speed, driver.getRawAxis(3) * -speed);
+    if(driver.getRawButton(7) == true) shooterStatus = 1;
+      else shooterStatus = 0;
+    
+    if(driver.getRawButton(8) == true)feederStatus = 0.75;
+      else feederStatus = 0;
+    
+    Shooter.set(shooterStatus);
+    Feeder.set(feederStatus);
+    LEDS.set(1);
   }
 
   /**
