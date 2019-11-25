@@ -6,13 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 //package frc.robot;
-package org.usfirst.frc.team3245.robot;
+package frc.robot;
 
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DriveStation;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
