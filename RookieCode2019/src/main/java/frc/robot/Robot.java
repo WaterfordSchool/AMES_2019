@@ -121,7 +121,7 @@ ooh ooh ahh ahh ahh
   @Override
   public void teleopPeriodic() {
   tDrive.tankDrive(drivercontroller.getRawAxis(1), drivercontroller.getRawAxis(3));
-  CoconutGun.set(operatorcontroller.getY());
+  CoconutGun.set(operatorcontroller.getY( ));
   
   }
 
