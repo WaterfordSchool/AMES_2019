@@ -38,13 +38,19 @@ public class DriveTrain extends Subsystem {
  }
  public void drive(Joystick j, double speed){
    if(j.getAxisCount()!=6){
-  drive(speed*j.getRawAxis(1), speed*j.getRawAxis(3));
+    if(!j.getRawButton(8)&&!j.getRawButton(7)){
+      drive(speed*j.getRawAxis(1), speed*j.getRawAxis(3));
+    }else if(j.getRawButton(8)){
+     drive(speed, speed);
+    }else if(j.getRawButton(7)){
+      drive(-speed,-speed);
+    }
    }else if(j.getRawAxis(2)==0&&j.getRawAxis(3)==0){
      drive(speed*j.getRawAxis(1), speed*j.getRawAxis(5));
    }else if(j.getRawAxis(2)>j.getRawAxis(3)){
-    drive(speed, speed);
+    drive(-speed*j.getRawAxis(2), -speed*j.getRawAxis(2));
    }else if(j.getRawAxis(2)<j.getRawAxis(3)){
-    drive(-speed, -speed);
+    drive(speed*j.getRawAxis(3), speed*j.getRawAxis(3));
    }
  
    
@@ -57,6 +63,6 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new Drive(1.0));
+    setDefaultCommand(new Drive(0.8));
   }
 }
