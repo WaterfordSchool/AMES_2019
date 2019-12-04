@@ -7,55 +7,29 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.*;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class Auto extends Command {
+public class Auto extends CommandGroup {
+  /**
+   * Add your docs here.
+   */
   public Auto() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.dT);
-  }
-  Timer time = new Timer();
-  double st;
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-    st=Timer.getFPGATimestamp();
-  }
+    // Add Commands here:
+    // e.g. addSequential(new Command1());
+    // addSequential(new Command2());
+    // these will run in order.
+    addSequential(new aDF());
+    addSequential(new aTL());
+    // To run multiple commands at the same time,
+    // use addParallel()
+    // e.g. addParallel(new Command1());
+    // addSequential(new Command2());
+    // Command1 and Command2 will run in parallel.
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    double t = Timer.getFPGATimestamp()-st;
-    while(t<2){
-      t=Timer.getFPGATimestamp()-st;
-      Robot.dT.drive(0.8, 0.8);
-    }
-    while(t<5){
-      t=Timer.getFPGATimestamp()-st;
-      Robot.dT.drive(-0.8, 0.8);
-    }
-      Robot.dT.drive(0, 0);
-    
-
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+    // A command group will require all of the subsystems that each member
+    // would require.
+    // e.g. if Command1 requires chassis, and Command2 requires arm,
+    // a CommandGroup containing them would require both the chassis and the
+    // arm.
   }
 }
