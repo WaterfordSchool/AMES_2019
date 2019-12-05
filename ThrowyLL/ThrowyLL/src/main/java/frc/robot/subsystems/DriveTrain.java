@@ -21,9 +21,14 @@ public class DriveTrain extends Subsystem {
   Talon l = new Talon(3);
 
   DifferentialDrive dD = new DifferentialDrive(l, r);
+  public DriveTrain(){
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+  public void drive(double l, double r){
+    dD.tankDrive(l, -r);
   }
 }
