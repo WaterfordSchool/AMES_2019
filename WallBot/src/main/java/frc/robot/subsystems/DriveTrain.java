@@ -39,7 +39,7 @@ public class DriveTrain extends Subsystem {
  public void drive(Joystick j, double speed){
    if(j.getAxisCount()!=6){
     if(!j.getRawButton(8)&&!j.getRawButton(7)){
-      drive(speed*j.getRawAxis(1), speed*j.getRawAxis(3));
+      drive(speed*j.getRawAxis(3), speed*j.getRawAxis(1)); //gucci line
     }else if(j.getRawButton(8)){
      drive(speed, speed);
     }else if(j.getRawButton(7)){
@@ -52,7 +52,7 @@ public class DriveTrain extends Subsystem {
    }else if(j.getRawAxis(2)<j.getRawAxis(3)){
     drive(speed*j.getRawAxis(3), speed*j.getRawAxis(3));
    }
- 
+
    
 }
  public void wall(){
