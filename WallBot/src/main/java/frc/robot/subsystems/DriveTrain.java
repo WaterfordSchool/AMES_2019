@@ -33,15 +33,15 @@ public class DriveTrain extends Subsystem {
  DifferentialDrive dT = new DifferentialDrive(l, r); 
  public DriveTrain(){
 
- }
+ }S
  public void drive(double left, double right){
   dT.tankDrive(left, right);
  }
  public void drive(int angle, double speed){
   double zRotation;
-  if(angle==315){
-    zRotation=(90-angle)/180.0;
-  }else {zRotation= 135/180.0;}
+  if(angle<=180){
+    zRotation=angle/180.0;
+  }else {zRotation=(angle-360)/180.0;}
   dT.arcadeDrive(speed, zRotation);
  }
  public void drive(Joystick j, double speed){
