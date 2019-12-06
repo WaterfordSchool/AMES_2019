@@ -120,7 +120,7 @@ public class Robot extends IterativeRobot {
     if(driver.getRawButton(7) == true) shooterStatus = 1;
       else shooterStatus = 0;
     
-    if(driver.getRawButton(8) == true)feederStatus = 0.75;
+    if(driver.getRawButton(8) == true) feederStatus = 0.75;
       else feederStatus = 0;
     
     Shooter.set(shooterStatus);
@@ -131,7 +131,7 @@ public class Robot extends IterativeRobot {
     
     if(driver.getRawButton(1)){
       if(target){
-        dT.arcadeDrive(-drive, -steer);
+        dT.arcadeDrive(0.0, -steer); //insert shooter code here
       }
     }
     else{
