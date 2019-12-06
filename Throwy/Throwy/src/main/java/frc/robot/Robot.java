@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.networktables.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,6 +47,16 @@ public class Robot extends IterativeRobot {
   double speed = 0.7;
   double shooterStatus = 0;
   double feederStatus = 0;
+  //LL Values
+  double tv;
+  double tx;
+  double ty;
+  double ta;
+  boolean arcade;
+  boolean target=false;
+  double drive = 0.0;
+  double steer = 0.0;
+
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
@@ -105,7 +116,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
-    dT.tankDrive(driver.getRawAxis(1) * -speed, driver.getRawAxis(3) * -speed);
+    //dT.tankDrive(driver.getRawAxis(1) * -speed, driver.getRawAxis(3) * -speed);
     if(driver.getRawButton(7) == true) shooterStatus = 1;
       else shooterStatus = 0;
     
@@ -115,6 +126,17 @@ public class Robot extends IterativeRobot {
     Shooter.set(shooterStatus);
     Feeder.set(feederStatus);
     LEDS.set(1);
+
+    LL();
+    
+    if(driver.getRawButton(1)){
+      if(target){
+        dT.arcadeDrive(-drive, -steer);
+      }
+    }
+    else{
+      dT.tankDrive(driver.getRawAxis(1) * speed, driver.getRawAxis(3) * speed);
+    }
   }
 
   /**
@@ -123,4 +145,33 @@ public class Robot extends IterativeRobot {
   @Override
   public void testPeriodic() {
   }
+
+  //Limelight Method
+  public void LL(){
+    final double STEER = 0.03;
+    final double DRIVE = 0.26;
+    final double AREA = 2.0; //area
+    final double MAXDRIVE = 0.7;
+ 
+    tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
+    tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+ 
+    if(tv < 1.0){
+      target = false;
+      drive = 0.0;
+      steer = 0.0;
+    } else {
+     target = true;
+     steer = tx * STEER;
+     drive = (AREA - ta)*DRIVE; 
+ 
+     if(drive > MAXDRIVE){
+       drive = MAXDRIVE;
+     }
+ 
+     }
+   }
+
 }
