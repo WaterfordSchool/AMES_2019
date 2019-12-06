@@ -113,7 +113,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if(driver.getPOV() > 0 || driver.getPOV() < 0){
+    if(driver.getPOV() > -1 || driver.getPOV() < -1){
     driveTrain.tankDrive(driver.getPOV() * speed, driver.getPOV() * speed); //potentially pass speed for the first parameter instead
   }
 }
