@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
 import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -36,9 +37,22 @@ public class DriveTrain extends Subsystem {
  public void drive(double left, double right){
   dT.tankDrive(left, right);
  }
+ public void drive(int angle, double speed){
+  double zRotation;
+  if(angle==315){
+    zRotation=(90-angle)/180.0;
+  }else {zRotation= 135/180.0;}
+  dT.arcadeDrive(speed, zRotation);
+ }
  public void drive(Joystick j, double speed){
    if(j.getAxisCount()!=6){
-    if(!j.getRawButton(8)&&!j.getRawButton(7)){
+    if (j.getAxisCount()==2){
+      if(j.getPOV()!=-1){
+        drive(j.getPOV(), speed);
+      }else{
+        drive(j.getRawAxis(0), speed);
+      }
+    }else if(!j.getRawButton(8)&&!j.getRawButton(7)){
       drive(speed*j.getRawAxis(3), speed*j.getRawAxis(1)); //gucci line
     }else if(j.getRawButton(8)){
      drive(speed, speed);
