@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -103,14 +106,17 @@ public class Robot extends IterativeRobot {
         break;
     }
   }
+  
 
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
-    driveTrain.tankDrive(-driver.getRawAxis(1) * speed, -driver.getRawAxis(3) * speed);
+    if(driver.getPOV() > 0 || driver.getPOV() < 0){
+    driveTrain.tankDrive(driver.getPOV() * speed, driver.getPOV() * speed); //potentially pass speed for the first parameter instead
   }
+}
 
   /**
    * This function is called periodically during test mode.
