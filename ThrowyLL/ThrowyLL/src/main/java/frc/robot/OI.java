@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,13 +25,21 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
   Joystick d = new Joystick(0);
+  Button meterButton = new JoystickButton(d, 8);
+  Button shooterButton = new JoystickButton(d, 7);
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
   public Joystick getD(){
     return d;
   }
-  
+  public OI(){
+    meterButton.whenReleased(new Meter());
+    shooterButton.whileHeld(new Shoot());
+    if (d.getRawAxis(1)!=0||d.getRawAxis(3)!=0){
+      Robot.dT.drive(d, 0.8);
+    }
+  }
   //// TRIGGERING COMMANDS WITH BUTTONS
   // Once you have a button, it's trivial to bind it to a button in one of
   // three ways:

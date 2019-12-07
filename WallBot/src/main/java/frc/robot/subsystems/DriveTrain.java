@@ -49,7 +49,7 @@ public class DriveTrain extends Subsystem {
   if(j.getAxisCount()!=6){
     if(!j.getRawButton(8)&&!j.getRawButton(7)){
       drive(speed*j.getRawAxis(3), speed*j.getRawAxis(1)); //gucci line
-    }else if(j.getRawButton(8)){
+    }else if(j.getRawButton(8)){                            //yes, i agree
      drive(speed, speed);
     }else if(j.getRawButton(7)){
       drive(-speed,-speed);

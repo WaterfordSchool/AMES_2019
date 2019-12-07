@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Auto;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Meter;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +26,8 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class Robot extends TimedRobot {
   public static DriveTrain dT = new DriveTrain();
+  public static Meter feeder = new Meter();
+  public static Shooter shooter = new Shooter();
   public static OI m_oi;
 
   Command m_autonomousCommand;
