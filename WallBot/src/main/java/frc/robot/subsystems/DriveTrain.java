@@ -22,12 +22,12 @@ import edu.wpi.first.wpilibj.Talon;
 public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
- Talon r1 = new Talon(0);
- Talon r2 = new Talon(1);
- Talon r3 = new Talon(2);
- Talon l1 = new Talon(3);
- Talon l2 = new Talon(4);
- Talon l3 = new Talon(5);
+ Talon l1 = new Talon(0);
+ Talon l2 = new Talon(1);
+ Talon l3 = new Talon(2);
+ Talon r1 = new Talon(3);
+ Talon r2 = new Talon(4);
+ Talon r3 = new Talon(5);
  SpeedControllerGroup r = new SpeedControllerGroup(r1, r2, r3); 
  SpeedControllerGroup l = new SpeedControllerGroup(l1, l2, l3);
  DifferentialDrive dT = new DifferentialDrive(l, r); 
