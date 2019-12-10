@@ -115,8 +115,10 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     if(driver.getPOV() > -1 || driver.getPOV() < -1){
     driveTrain.tankDrive(driver.getPOV() * speed, driver.getPOV() * speed); //potentially pass speed for the first parameter instead
+    SmartDashboard.putNumber("teleopPeriodic", driver.getPOV());
   }
 }
+// fortnite
 
   /**
    * This function is called periodically during test mode.
