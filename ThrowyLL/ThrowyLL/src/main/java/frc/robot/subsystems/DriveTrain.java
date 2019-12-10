@@ -35,6 +35,6 @@ public class DriveTrain extends Subsystem {
     dD.tankDrive(l, -r);
   }
   public void drive(Joystick driver, double speed){
-    dD.tankDrive(driver.getRawAxis(1)*speed, driver.getRawAxis(3)*speed);
+    dD.tankDrive(-driver.getRawAxis(1)*speed, -driver.getRawAxis(3)*speed);
   }
 }
