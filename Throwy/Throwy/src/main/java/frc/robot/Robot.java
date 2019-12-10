@@ -125,7 +125,6 @@ public class Robot extends IterativeRobot {
     
     Shooter.set(shooterStatus);
     Feeder.set(feederStatus);
-    LEDS.set(1);
 
     LL();
     
