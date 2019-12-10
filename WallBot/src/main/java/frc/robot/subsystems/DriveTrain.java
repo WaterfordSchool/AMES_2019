@@ -35,7 +35,7 @@ public class DriveTrain extends Subsystem {
 
  }
  public void drive(double left, double right){
-  dT.tankDrive(left, right);
+  dT.tankDrive(-left, -right);
  }
  public void drive(int angle, double speed){
   double zRotation;
