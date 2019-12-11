@@ -35,7 +35,7 @@ public class DriveTrain extends Subsystem {
 
  }
  public void drive(double left, double right){
-  dT.tankDrive(-left, -right);
+  dT.tankDrive(left, right);
  }
  public void drive(int angle, double speed){
   double zRotation;
@@ -48,22 +48,22 @@ public class DriveTrain extends Subsystem {
    
   if(j.getAxisCount()!=6){
     if(!j.getRawButton(8)&&!j.getRawButton(7)){
-      drive(speed*j.getRawAxis(1), speed*j.getRawAxis(3)); //gucci line
+      drive(-speed*j.getRawAxis(1), -speed*j.getRawAxis(3)); //gucci line
     }else if(j.getRawButton(8)){                            //yes, i agree
-     drive(speed, speed);
+     drive(-speed, -speed);
     }else if(j.getRawButton(7)){
-      drive(-speed,-speed);
+      drive(speed,speed);
     }
   }else if(j.getName().contains("Guitar")){
     if(j.getPOV()!=-1){
       drive(j.getPOV(), speed);
     }else drive(0.0, 0.0);
   }else if(j.getRawAxis(2)==0&&j.getRawAxis(3)==0){
-    drive(speed*j.getRawAxis(1), speed*j.getRawAxis(5));
+    drive(-speed*j.getRawAxis(1), -speed*j.getRawAxis(5));
   }else if(j.getRawAxis(2)>j.getRawAxis(3)){
-    drive(-speed*j.getRawAxis(2), -speed*j.getRawAxis(2));
+    drive(speed*j.getRawAxis(2), speed*j.getRawAxis(2));
   }else if(j.getRawAxis(2)<j.getRawAxis(3)){
-    drive(speed*j.getRawAxis(3), speed*j.getRawAxis(3));
+    drive(-speed*j.getRawAxis(3), -speed*j.getRawAxis(3));
   }
 
    
