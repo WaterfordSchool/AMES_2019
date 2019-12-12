@@ -22,12 +22,12 @@ import edu.wpi.first.wpilibj.Talon;
 public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
- Talon r1 = new Talon(0);
- Talon r2 = new Talon(1);
- Talon r3 = new Talon(2);
- Talon l1 = new Talon(3);
- Talon l2 = new Talon(4);
- Talon l3 = new Talon(5);
+ Talon l1 = new Talon(0);
+ Talon l2 = new Talon(1);
+ Talon l3 = new Talon(2);
+ Talon r1 = new Talon(3);
+ Talon r2 = new Talon(4);
+ Talon r3 = new Talon(5);
  SpeedControllerGroup r = new SpeedControllerGroup(r1, r2, r3); 
  SpeedControllerGroup l = new SpeedControllerGroup(l1, l2, l3);
  DifferentialDrive dT = new DifferentialDrive(l, r); 
@@ -48,22 +48,22 @@ public class DriveTrain extends Subsystem {
    
   if(j.getAxisCount()!=6){
     if(!j.getRawButton(8)&&!j.getRawButton(7)){
-      drive(speed*j.getRawAxis(3), speed*j.getRawAxis(1)); //gucci line
+      drive(-speed*j.getRawAxis(1), -speed*j.getRawAxis(3)); //gucci line
     }else if(j.getRawButton(8)){                            //yes, i agree
-     drive(speed, speed);
+     drive(-speed, -speed);
     }else if(j.getRawButton(7)){
-      drive(-speed,-speed);
+      drive(speed,speed);
     }
   }else if(j.getName().contains("Guitar")){
     if(j.getPOV()!=-1){
       drive(j.getPOV(), speed);
     }else drive(0.0, 0.0);
   }else if(j.getRawAxis(2)==0&&j.getRawAxis(3)==0){
-    drive(speed*j.getRawAxis(1), speed*j.getRawAxis(5));
+    drive(-speed*j.getRawAxis(1), -speed*j.getRawAxis(5));
   }else if(j.getRawAxis(2)>j.getRawAxis(3)){
-    drive(-speed*j.getRawAxis(2), -speed*j.getRawAxis(2));
+    drive(speed*j.getRawAxis(2), speed*j.getRawAxis(2));
   }else if(j.getRawAxis(2)<j.getRawAxis(3)){
-    drive(speed*j.getRawAxis(3), speed*j.getRawAxis(3));
+    drive(-speed*j.getRawAxis(3), -speed*j.getRawAxis(3));
   }
 
    

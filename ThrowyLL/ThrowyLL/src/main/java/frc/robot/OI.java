@@ -25,8 +25,8 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
   Joystick d = new Joystick(0);
-  Button meterButton        = new JoystickButton(d, 8);
-  Button shooterButton      = new JoystickButton(d, 7);
+  Button meterButton        = new JoystickButton(d, 7);
+  Button shooterButton      = new JoystickButton(d, 8);
   Button autoShooterButton  = new JoystickButton(d, 6);
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
@@ -35,7 +35,7 @@ public class OI {
     return d;
   }
   public OI(){
-    meterButton.whenReleased(new Meter());
+    meterButton.whenPressed(new Meter());
     shooterButton.whileHeld(new Shoot());
     autoShooterButton.whenPressed(new AutoShoot());
     if (d.getRawAxis(1)!=0||d.getRawAxis(3)!=0){
