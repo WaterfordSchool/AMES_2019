@@ -113,10 +113,11 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if(driver.getPOV() > -1 || driver.getPOV() < -1){
-    driveTrain.tankDrive(driver.getPOV() * speed, driver.getPOV() * speed); //potentially pass speed for the first parameter instead
-    SmartDashboard.putNumber("teleopPeriodic", driver.getPOV());
-  }
+    if(driver.getPOV() == 0) driveTrain.tankDrive(-speed, -speed); //backwords
+    if(driver.getPOV() == 4) driveTrain.tankDrive(speed, speed); //forwards
+    if(driver.getPOV() == 5 || driver.getPOV() == 6 || driver.getPOV() == 7) driveTrain.tankDrive(speed, -speed); //turn right
+    if(driver.getPOV() == 1 || driver.getPOV() == 2 || driver.getPOV() == 3) driveTrain.tankDrive(-speed, speed); //turn left
+    if(driver.getPOV() == -1) driveTrain.tankDrive(0, 0); //default case
 }
 // fortnite
 
