@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
+
+import java.sql.Time;
+
 import edu.wpi.first.networktables.*;
 
 /**
@@ -58,6 +61,7 @@ public class Robot extends IterativeRobot {
   boolean target=false;
   double drive = 0.0;
   double steer = 0.0;
+  double autoStartTime;
 
   Timer t = new Timer();
 
@@ -98,6 +102,7 @@ public class Robot extends IterativeRobot {
     // defaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
     t.start();
+    autoStartTime = Timer.getFPGATimestamp();
   }
 
   /**
@@ -105,16 +110,41 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    
+    double currentTime = Timer.getFPGATimestamp();
+    double timeElapsed = currentTime - autoStartTime;
+    if(timeElapsed < 1.5){
+      dT.tankDrive(speed, speed);
+    }
+    else if(timeElapsed < 14){
+      Shooter.set(0.9);
+    }
+    else if(timeElapsed < 14){
+      Feeder.set(0.6);
+    }
+    else {
+      dT.tankDrive(0.0, 0.0);
+      Shooter.set(0.0);
+      Feeder.set(0.0);
+    }
+    
+    
+   /* 
     switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
         break;
       case kDefaultAuto:
       default:
+
+      */
+      
+     /* 
         // Put default auto code here
-        if(t.get()<3.0){
+        if(t.get()<1.5){
           dT.arcadeDrive(1.0, 0);
-        }else{
+        }
+        else if() {
           dT.arcadeDrive(0, -0.006);
           t.stop();
           t.reset();
@@ -125,6 +155,7 @@ public class Robot extends IterativeRobot {
         }
         break;
     }
+    */
   }
 
   /**
