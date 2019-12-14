@@ -177,7 +177,7 @@ public class Robot extends IterativeRobot {
     
     if(driver.getRawButton(1)){
       if(target){
-        dT.arcadeDrive(0.0, -steer); //insert shooter code here
+        dT.arcadeDrive(0.0, steer); //insert shooter code here
         if(!target){
           Feeder.set(0.5);
           Shooter.set(1.0);
