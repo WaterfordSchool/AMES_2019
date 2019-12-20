@@ -50,9 +50,9 @@ public class DriveTrain extends Subsystem {
     if(!j.getRawButton(8)&&!j.getRawButton(7)){
       drive(-speed*j.getRawAxis(1), -speed*j.getRawAxis(3)); //gucci line
     }else if(j.getRawButton(8)){                            //yes, i agree
-     drive(-speed, -speed);
+     drive(speed, speed);
     }else if(j.getRawButton(7)){
-      drive(speed,speed);
+      drive(-speed,-speed);
     }
   }else if(j.getName().contains("Guitar")){
     if(j.getPOV()!=-1){

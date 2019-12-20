@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
   Joystick op = new Joystick(1);
   JoystickButton button7 = new JoystickButton(driver, 7);
   JoystickButton button8 = new JoystickButton(driver, 8);
-  double speed = 0.8;
+  public double speed = 0.8;
   double shooterStatus = 0;
   double feederStatus = 0;
   //LL Values
@@ -117,10 +117,12 @@ public class Robot extends IterativeRobot {
     }
     else if(timeElapsed < 14){
       Shooter.set(0.9);
+      Feeder.set(0.4);
     }
-    else if(timeElapsed < 14){
+    /*else if(timeElapsed < 14){
       Feeder.set(0.6);
     }
+    */
     else {
       dT.tankDrive(0.0, 0.0);
       Shooter.set(0.0);
@@ -147,7 +149,7 @@ public class Robot extends IterativeRobot {
     
     if(driver.getRawButton(1)){
       if(target){
-        dT.arcadeDrive(0.0, -steer); //insert shooter code here
+        dT.arcadeDrive(0.0, steer); //insert shooter code here
         if(!target){
           Feeder.set(0.5);
           Shooter.set(1.0);
@@ -156,6 +158,14 @@ public class Robot extends IterativeRobot {
     }
     else{
       dT.tankDrive(-driver.getRawAxis(1) * speed, -driver.getRawAxis(3) * speed);
+    }
+
+    //fast button
+    if (driver.getRawButtonPressed(7) || driver.getRawButtonPressed(8)){
+      speed = 1.0;
+    }
+    else{
+      speed = 0.8;
     }
   }
 
