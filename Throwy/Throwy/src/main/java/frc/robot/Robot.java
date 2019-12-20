@@ -63,7 +63,6 @@ public class Robot extends IterativeRobot {
   double steer = 0.0;
   double autoStartTime;
 
-  Timer t = new Timer();
 
   @Override
   public void robotInit() {
@@ -101,7 +100,7 @@ public class Robot extends IterativeRobot {
     // autoSelected = SmartDashboard.getString("Auto Selector",
     // defaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
-    t.start();
+    
     autoStartTime = Timer.getFPGATimestamp();
   }
 
@@ -127,35 +126,6 @@ public class Robot extends IterativeRobot {
       Shooter.set(0.0);
       Feeder.set(0.0);
     }
-    
-    
-   /* 
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-
-      */
-      
-     /* 
-        // Put default auto code here
-        if(t.get()<1.5){
-          dT.arcadeDrive(1.0, 0);
-        }
-        else if() {
-          dT.arcadeDrive(0, -0.006);
-          t.stop();
-          t.reset();
-          if(t.get()<1){
-            Shooter.set(1);
-            Feeder.set(0.5);
-          }
-        }
-        break;
-    }
-    */
   }
 
   /**
