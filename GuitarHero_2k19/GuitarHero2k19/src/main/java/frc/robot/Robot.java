@@ -9,14 +9,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.JoystickBase;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,25 +29,20 @@ public class Robot extends IterativeRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  
+  //Assigning controllers and motors and shit
+  Talon Left = new Talon(0);
+  Talon Right = new Talon(3);
+  Joystick guitar = new Joystick(0);
+  JoystickButton green = new JoystickButton(guitar, 1);
+  JoystickButton red = new JoystickButton(guitar, 2);
+  Joystick playerTwo = new Joystick(1);
+  DifferentialDrive dt = new DifferentialDrive(Right, Left);
+  double speed = 0.8;
+  boolean feederStatus = false;
+  boolean shooterStatus = false;
+  
 
-  public double speed = 0.8;
-
-  //Left Motors
-  Talon l1 = new Talon(0);
-  Talon l2 = new Talon(1);
-  Talon l3 = new Talon(2);
-  //Right Motors
-  Talon r1 = new Talon(3);
-  Talon r2 = new Talon(4);
-  Talon r3 = new Talon(5);
-
-  //Speed Controller Groups
-  SpeedControllerGroup left = new SpeedControllerGroup(l1, l2, l3);
-  SpeedControllerGroup right = new SpeedControllerGroup(r1, r2, r3);
-
-  DifferentialDrive driveTrain = new DifferentialDrive(left, right);
-
-  Joystick driver = new Joystick(0);
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -106,21 +100,13 @@ public class Robot extends IterativeRobot {
         break;
     }
   }
-  
 
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
-    driveTrain.tankDrive(driver.getRawAxis(1) * -speed, driver.getRawAxis(3) * -speed);
-    /*if(driver.getPOV() == 0) driveTrain.tankDrive(-speed, -speed); //backwords
-    if(driver.getPOV() == 4) driveTrain.tankDrive(speed, speed); //forwards
-    if(driver.getPOV() == 5 || driver.getPOV() == 6 || driver.getPOV() == 7) driveTrain.tankDrive(speed, -speed); //turn right
-    if(driver.getPOV() == 1 || driver.getPOV() == 2 || driver.getPOV() == 3) driveTrain.tankDrive(-speed, speed); //turn left
-    if(driver.getPOV() == -1) driveTrain.tankDrive(0, 0); //default case */
-}
-// fortnite
+  }
 
   /**
    * This function is called periodically during test mode.
