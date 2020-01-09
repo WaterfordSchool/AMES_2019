@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
   Joystick op = new Joystick(1);
   JoystickButton button7 = new JoystickButton(driver, 7);
   JoystickButton button8 = new JoystickButton(driver, 8);
-  double speed = 0.8;
+  public double speed = 0.8;
   double shooterStatus = 0;
   double feederStatus = 0;
   //LL Values
@@ -63,7 +63,6 @@ public class Robot extends IterativeRobot {
   double steer = 0.0;
   double autoStartTime;
 
-  Timer t = new Timer();
 
   @Override
   public void robotInit() {
@@ -101,7 +100,7 @@ public class Robot extends IterativeRobot {
     // autoSelected = SmartDashboard.getString("Auto Selector",
     // defaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
-    t.start();
+    
     autoStartTime = Timer.getFPGATimestamp();
   }
 
@@ -118,44 +117,17 @@ public class Robot extends IterativeRobot {
     }
     else if(timeElapsed < 14){
       Shooter.set(0.9);
+      Feeder.set(0.4);
     }
-    else if(timeElapsed < 14){
+    /*else if(timeElapsed < 14){
       Feeder.set(0.6);
     }
+    */
     else {
       dT.tankDrive(0.0, 0.0);
       Shooter.set(0.0);
       Feeder.set(0.0);
     }
-    
-    
-   /* 
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-
-      */
-      
-     /* 
-        // Put default auto code here
-        if(t.get()<1.5){
-          dT.arcadeDrive(1.0, 0);
-        }
-        else if() {
-          dT.arcadeDrive(0, -0.006);
-          t.stop();
-          t.reset();
-          if(t.get()<1){
-            Shooter.set(1);
-            Feeder.set(0.5);
-          }
-        }
-        break;
-    }
-    */
   }
 
   /**
@@ -177,7 +149,7 @@ public class Robot extends IterativeRobot {
     
     if(driver.getRawButton(1)){
       if(target){
-        dT.arcadeDrive(0.0, -steer); //insert shooter code here
+        dT.arcadeDrive(0.0, steer); //insert shooter code here
         if(!target){
           Feeder.set(0.5);
           Shooter.set(1.0);
@@ -186,6 +158,14 @@ public class Robot extends IterativeRobot {
     }
     else{
       dT.tankDrive(-driver.getRawAxis(1) * speed, -driver.getRawAxis(3) * speed);
+    }
+
+    //fast button
+    if (driver.getRawButtonPressed(7) || driver.getRawButtonPressed(8)){
+      speed = 1.0;
+    }
+    else{
+      speed = 0.8;
     }
   }
 
