@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Talon;
@@ -15,8 +16,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
-
-
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.networktables.*;
 
 /**
@@ -65,7 +65,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
+    
     SmartDashboard.putData("Auto choices", m_chooser);
+    
   }
 
   /**
@@ -99,6 +101,7 @@ public class Robot extends TimedRobot {
     System.out.println("Auto selected: " + m_autoSelected);
     
     autoStartTime = Timer.getFPGATimestamp();
+    speed = SmartDashboard.getNumber("speed", 0.8);
   }
 
   /**
@@ -109,10 +112,10 @@ public class Robot extends TimedRobot {
     
     double currentTime = Timer.getFPGATimestamp();
     double timeElapsed = currentTime - autoStartTime;
-    if(timeElapsed < 1.5){
-      dT.tankDrive(speed, speed);
+    if(timeElapsed < 4){
+      dT.tankDrive(-speed, -speed);
     }
-    else if(timeElapsed < 14){
+    /*else if(timeElapsed < 14){
       Shooter.set(0.9);
       Feeder.set(0.4);
     }
