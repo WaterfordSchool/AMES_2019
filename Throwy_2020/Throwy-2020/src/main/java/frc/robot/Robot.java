@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
   JoystickButton button7 = new JoystickButton(driver, 7);
   JoystickButton button8 = new JoystickButton(driver, 8);
   public double speed = 0.8;
+  public double auto_time = 4;
   double shooterStatus = 0;
   double feederStatus = 0;
   //LL Values
@@ -102,6 +103,7 @@ public class Robot extends TimedRobot {
     
     autoStartTime = Timer.getFPGATimestamp();
     speed = SmartDashboard.getNumber("speed", 0.8);
+    auto_time = SmartDashboard.getNumber("auto_time", 4);
   }
 
   /**
@@ -112,7 +114,7 @@ public class Robot extends TimedRobot {
     
     double currentTime = Timer.getFPGATimestamp();
     double timeElapsed = currentTime - autoStartTime;
-    if(timeElapsed < 4){
+    if(timeElapsed < auto_time){
       dT.tankDrive(-speed, -speed);
     }
     /*else if(timeElapsed < 14){

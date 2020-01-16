@@ -1,0 +1,18 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="25" y="18"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="206" y="18"/>
+		<width>551</width>
+		<height>313</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
+	<widget field="Auto choices" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="15" y="81"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>
