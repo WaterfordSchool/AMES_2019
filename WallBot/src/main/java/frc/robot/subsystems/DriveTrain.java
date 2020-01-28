@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
  public DriveTrain(){
 
  }
- public void drive(double left, double right){
+public void drive(double left, double right){
   dT.tankDrive(left, right);
  }
  public void drive(int angle, double speed){
@@ -44,6 +44,7 @@ public class DriveTrain extends Subsystem {
   }else {zRotation=(angle-360)/180.0;}
   dT.arcadeDrive(speed, zRotation);
  }
+
  public void drive(Joystick j, double speed){
    
   if(j.getAxisCount()!=6){
@@ -71,6 +72,7 @@ public class DriveTrain extends Subsystem {
  public void wall(){
 
  }
+
  
   @Override
   public void initDefaultCommand() {
