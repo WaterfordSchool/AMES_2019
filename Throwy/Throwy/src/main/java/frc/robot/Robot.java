@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
   Joystick op = new Joystick(1);
   JoystickButton button7 = new JoystickButton(driver, 7);
   JoystickButton button8 = new JoystickButton(driver, 8);
-  public double speed = 0.8;
+  public double speed = 1.0;
   double shooterStatus = 0;
   double feederStatus = 0;
   //LL Values
