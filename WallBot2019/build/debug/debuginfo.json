@@ -1,0 +1,9 @@
+[
+  {
+    "artifact": "frcJava (in project WallBot2019)",
+    "target": "roborio",
+    "debugfile": "frcJava_roborio.debugconfig",
+    "project": "WallBot2019",
+    "language": "java"
+  }
+]
