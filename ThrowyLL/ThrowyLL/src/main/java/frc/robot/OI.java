@@ -25,8 +25,9 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
   Joystick d = new Joystick(0);
-  Button meterButton = new JoystickButton(d, 8);
-  Button shooterButton = new JoystickButton(d, 7);
+  Joystick o = new Joystick(1);
+  Button meterButton = new JoystickButton(o, 8);
+  Button shooterButton = new JoystickButton(o, 7);
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
